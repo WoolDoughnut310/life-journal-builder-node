@@ -12,11 +12,6 @@ interface DateRange {
     end: string;
 }
 
-export interface Pagination {
-    skip: number;
-    take: number;
-}
-
 interface Options {
     getDateRanges: () => (DateRange | undefined)[];
     getImageName?: (i: number) => string;
