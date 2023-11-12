@@ -1,13 +1,6 @@
-
 import type { CreatePageParameters } from '@notionhq/client/build/src/api-endpoints.js';
 import { APIErrorCode, ClientErrorCode, isNotionClientError } from '@notionhq/client';
 
-interface DateRange {
-    start: string;
-    end: string;
-}
-
-// Full type definition of result needed
 function createCoverImage(
     image?: string
 ): { type: 'external'; external: { url: string } } | undefined {
@@ -42,7 +35,7 @@ function createParentRelation(parentId: string): {
     };
 }
 
-function isDateRange(object: any): object is DateRange {
+function isDateRange(object: any): object is { start: string; end: string; } {
     return 'start' in object && 'end' in object;
 }
 

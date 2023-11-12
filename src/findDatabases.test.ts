@@ -22,7 +22,7 @@ describe('retrieves database IDs from a workspace', () => {
             results: [...names.map(createDBMock), createDBMock('Houses'), createDBMock('School')]
         });
 
-        const returned = await findDatabases(notion);
+        const returned = await findDatabases();
 
         expect(returned).toEqual(
             Object.fromEntries(names.map((name) => [name.toLowerCase(), `db-${name.toLowerCase()}`]))
@@ -34,6 +34,6 @@ describe('retrieves database IDs from a workspace', () => {
             results: [createDBMock('Months')]
         });
 
-        await expect(() => findDatabases(notion)).rejects.toThrowError();
+        await expect(() => findDatabases()).rejects.toThrowError();
     });
 });

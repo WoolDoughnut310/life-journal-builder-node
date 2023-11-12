@@ -45,12 +45,7 @@ export function getDateRanges(
     endOfFunction: (date: Date, params?: { [key: string]: number }) => Date,
     n: number,
     params: { [key: string]: number } = {},
-    pagination?: Pagination
 ) {
-    if (!pagination) {
-        pagination = { skip: 0, take: n };
-    }
-
     const year = getCurrentYear();
     const ranges: (DateRange | undefined)[] = [];
 
@@ -61,32 +56,15 @@ export function getDateRanges(
         start = nextMonday(start);
     }
 
-    let taking = false;
-
-    const { skip, take } = pagination;
 
     for (let i = 0; i < n; i++) {
-        // start collecting date ranges once `skip`
-        // number of iterations have passed
-        if (i === skip) {
-            taking = true;
-        }
-
-        if (i === skip + take) {
-            // if the correct number of dateRanges
-            // have been added to the array, stop
-            break;
-        }
-
         const end = endOfFunction(start, params);
 
         ranges.push(
-            taking
-                ? {
-                    start: formatDate(start),
-                    end: formatDate(end)
-                }
-                : undefined
+            {
+                start: formatDate(start),
+                end: formatDate(end)
+            }
         );
 
         start = addDays(end, 1);
